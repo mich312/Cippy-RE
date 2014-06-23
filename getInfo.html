@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Cippy User data</title>
+
+	<!-- JQuery -->
+	<meta http- equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+
+	<style type="text/css">
+		*, *:before, *:after{
+			margin: 0 auto;
+			padding: 0;
+			text-rendering: optimizeLegibility;
+			-webkit-font-smoothing: antialiased;
+			-webkit-appearance: none;
+			border-radius: 0;
+			text-decoration: none;
+			list-style-type: none;
+			font-family: Helvetica;
+
+			-webkit-appearance:none;
+			-moz-appearance:none;
+			outline: none;
+			-moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+			font-family: Helvetica Neue;
+		}
+
+		body{
+			text-align: center;
+		}
+
+		p{
+			font-size: 1.2em;
+			padding: 0.25em;
+		}
+
+		form{
+			margin-top: 5%;
+			width: 30rem;
+			text-align: center;
+		}
+
+		input{
+			border: none;
+			font-size: 1.2em;
+			padding: 0.25em;
+			border-radius: 0.25em;
+		}
+
+		input[type="text"]{
+			margin: 1em 0;
+			width: 89%;
+			float: left;
+			border: 2px solid #ddd;
+		}
+
+		input[type="text"]:hover,input[type="number"]:hover{
+			border: 2px solid #ccc;
+		}
+
+		input[type="text"]:focus,input[type="number"]:focus{
+			background: #fff;
+			border: 2px solid #3498db;
+		}
+
+		input[type="number"]{
+			margin: 1em 0;
+			width: 10%;
+			float: right;
+			border: 2px solid #ddd;
+		}		
+
+		input[type="submit"]{
+			display: inline-block;
+			padding: 0.25em 1em;
+			background: #2ecc71;
+			color: white;
+			cursor: hand;
+		}
+
+		input[type="submit"]:active{
+			background: #27ae60;
+		}
+
+		input[type="submit"]:hover{
+			background: #40DF82;
+		}
+
+
+		#log{
+			width: 40rem;
+			margin-top: 5%;
+			text-align: left;
+		}
+
+		#log h1{
+			text-align: left;
+		}
+
+		textarea{
+			text-align: left;
+			width: 100%;
+			min-height: 15em;
+			max-height: 15em;
+			max-width: 100%;
+			border: none;
+			font-size: 1.1em;
+			padding: 0.5em;
+			border-radius: 0.25em;
+			background: #eee;
+			margin-top: 0.5em;
+			font-family: monospace;
+			overflow: auto;
+			resize: none;
+		}
+
+		#loading{
+			margin: 2rem;
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			background: #eee;
+			padding: 0.5em;
+			border-radius: 1em;
+			display: none;
+		}
+
+		#loading img{
+			width: 3rem;
+			height: auto;
+			float: left;
+			margin-right: 2rem;
+		}
+
+		#loading h1{
+			float: left;
+			line-height: 3rem;
+			font-size: 1.1em;
+			font-weight: 400;
+		}
+
+		a{
+			border: none;
+			font-size: 1.2em;
+			padding: 0.25em;
+			border-radius: 0.25em;
+			margin: 1em 0 auto;
+			display: inline-block;
+			padding: 0.25em 0.75em;
+			background: #2ecc71;
+			color: white;
+			cursor: hand;
+		}
+
+		a:active{
+			background: #27ae60;
+		}
+
+		a:hover{
+			background: #40DF82;
+		}
+	</style>
+
+	<script type="text/javascript">
+
+		var userId = '';
+		var appVersion = '3';
+		var os = 'iPhone OS';
+		var device = 'iPhone';
+		var culture = 'DE';
+		var osv = '7.1.1';
+
+		var sujetType = '';
+
+
+		//////////////////////
+		var data = '';
+
+		var startScreen;
+		var giftList;
+		var buddy;
+		var sujetList;
+
+		var ret;
+		var data = [];
+		var sujetItems = [];
+		var sujetMax;
+
+		var star = '\u2605';
+
+		$(document).ready(function(){
+			$('#again').hide();
+			$('form').submit(function(e){
+				e.preventDefault();
+				userId = $('#id').val();
+				sujetType = $('#sujet').val();
+
+				if (userId.length < 1 || sujetType.length < 1){
+					$('#id').css('border', '2px solid #ff0000');
+					$('#sujet').css('border', '2px solid #ff0000');
+				}else{
+
+					log('ID = '+userId);
+					log('SujetType = '+sujetType);
+					$('#id').prop('disabled', true);
+					$('#start').prop('disabled', true);
+					$('#sujet').prop('disabled', true);
+					$('#start').css('background', '#aaa');
+					
+				    setTimeout(function() {
+				    	$('form').slideUp(200);
+				    }, 500);
+					start();
+				}
+				return false;
+			});
+		});
+		
+		function start(){
+				//StartScreen
+				//stdRequest("http://service.cippy.it/FARESTService/GetStartScreen", data, 'startScreen');
+				//console.log(startScreen);
+
+				//gotten gift list
+				//stdRequest("http://service.cippy.it/FARESTService/GetGottenGiftList", data, 'giftList');
+				//console.log(giftList);
+				
+				//buddy
+				//stdRequest("http://service.cippy.it/FARESTService/GetBuddyBundleState", data, 'buddy');
+				//console.log(buddy);
+		
+				data = '{\
+							"UserID":"'+userId+'",\
+							"AppVersion":'+appVersion+',\
+							"RequestTime":"/Date('+'1402846713099'+'-0000)/",\
+							"Operatingsystem":"'+os+'",\
+							"Devicetype":"'+device+'",\
+							"Culture":"'+culture+'",\
+							"OperatingsystemVersion":"'+osv+'"\
+						}';
+
+				stdRequest("http://service.cippy.it/FARESTService/GetUserProfile", data, '*');
+				stdRequest("http://service.cippy.it/FARESTService/GetCommuneList", data, '*');
+		}
+
+		function stdRequest(url, data, va){
+			log("PUT request "+url);
+			$.ajax({
+				type: "PUT",
+				//async: false,
+				beforeSend: function (request)
+	            {
+	                request.setRequestHeader("Host", "service.cippy.it");
+	                request.setRequestHeader("Authorization", "4863f25d57230256b687a9428aeae615");
+	                request.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+	                request.setRequestHeader("Accept", "*/*");
+	                request.setRequestHeader("Accept-Language", "de, en, fr, zh-Hans, zh-Hant, ja, nl, it, es, es-MX, ko, pt, pt-PT, da, fi, nb, sv, ru, pl, tr, uk, ar, hr, cs, el, he, ro, sk, th, id, ms, en-GB, en-AU, ca, hu, vi, en-us;q=0.8");
+	                request.setRequestHeader("Accept-Encoding", "gzip");
+	                request.setRequestHeader("Connection", "keep-alive");
+	                request.setRequestHeader("User-Agent", "it.firstavenue.cippy/1.6.4 (unknown, iPhone OS 7.1.1, iPhone, Scale/2.000000)");
+	            },
+				url: url,
+				contentType: "application/json",
+				data: data,
+				success: function(data){
+					log("[Response] "+url);
+					console.log(data);
+				}
+		    });
+		};
+
+		//what the fuck?
+		function getToken(){
+			var v = "1234567890abcdef";
+			var token = "";
+			for(i=0;i<32;i++)
+				token += v[Math.floor(Math.random()*(v.length-1))];
+			log(token.length)
+			return token;
+		}
+
+		function load(val){
+			if(val == true)
+				$('#loading').fadeIn(100);
+			else
+				$('#loading').fadeOut(100);
+		}
+
+		function log(txt){
+			t = $('textarea');
+			if (t.val().length>0)
+				t.val(t.val()+'\n'+txt);
+			else
+				t.val(t.val()+txt);
+			$('textarea').scrollTop($('textarea')[0].scrollHeight);
+		}
+
+		function again(){
+			$('textarea').val('');
+			$('#id').prop('disabled', false);
+			$('#start').prop('disabled', false);
+			$('#sujet').prop('disabled', false);
+			$('#start').css('background', '#2ecc71');
+			$('form').slideDown(100);
+			$('#again').fadeOut(100);
+		}
+	</script>
+</head>
+
+<body>
+	<form>
+	<!-- 07cca6fe-2128-4f48-aca2-27cf76fefba3 -->
+		<p>Bitte geben Sie ihre Cippy-ID ein</p>
+		<input type="text" name="id" placeholder="ID" id="id">
+		<input type="number" name="type" placeholder="0" value="0" id="sujet">
+		<input type="submit" value="Starten" id="start">
+	</form>
+
+	<div id="log">
+		<p>Log</p>
+		<textarea disabled="disabled" htmlEsacpe="false"></textarea>
+	</div>
+
+	<a href="javascript:again();" id="again">Neuer Versuch</a>
+
+	<div id="loading">
+		<img src="loader.gif" class="load">
+		<h1>Daten werden geladen!</h1>
+	</div>
+</body>
+</html>
