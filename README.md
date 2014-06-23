@@ -4,7 +4,7 @@ Reverse Engineering [Cippy App].
 
 ##How to use
 
-1. Open _CippyProxy.jar_ on your Computer.
+1. Open ```CippyProxy.jar``` on your Computer.
 
 2. Use HTTP-Proxy to route all traffic to your Computer and open Cippy App on your phone.
 
