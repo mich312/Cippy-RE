@@ -2,8 +2,6 @@
 
 Reverse Engineering [Cippy App].
 
-----------
-
 #How to use
 
 1. Open CippyProxy.jar on your Computer.
@@ -13,7 +11,7 @@ Reverse Engineering [Cippy App].
 3. Note your Cippy-ID
 
 4. Open your browser without protections. (Tested on Safari and Chrome)
-  - For Chrome users:
+  - For Chrome users need start from console:
   ```
     chrome.exe --disable-web-security
   ```
