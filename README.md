@@ -25,7 +25,8 @@ Reverse Engineering [Cippy App].
 ```cippy.py``` is a Cippy bot written in Python. You can start it directly from a bash shell.
 
 1. Open ```cippy.py``` in a Texteditor and insert your Cippy ID. You can also insert your Pushover information to get updates via push directly on your Smartphone.
-2. ```cippy.py``` depends on some python libraries. To install simply run the following commands in your shell.```bash
+2. ```cippy.py``` depends on the python requests library. To install simply run the following commands in your shell.
+```bash
 $ pip install requests
 ```
 3. Run with ```./cippy.py```
