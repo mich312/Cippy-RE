@@ -208,7 +208,7 @@
 					$('#start').prop('disabled', true);
 					$('#sujet').prop('disabled', true);
 					$('#start').css('background', '#aaa');
-					
+
 				    setTimeout(function() {
 				    	$('form').slideUp(200);
 				    }, 500);
@@ -217,7 +217,7 @@
 				return false;
 			});
 		});
-		
+
 		function start(){
 				//StartScreen
 				//stdRequest("http://service.cippy.it/FARESTService/GetStartScreen", data, 'startScreen');
@@ -226,11 +226,11 @@
 				//gotten gift list
 				//stdRequest("http://service.cippy.it/FARESTService/GetGottenGiftList", data, 'giftList');
 				//console.log(giftList);
-				
+
 				//buddy
 				//stdRequest("http://service.cippy.it/FARESTService/GetBuddyBundleState", data, 'buddy');
 				//console.log(buddy);
-		
+
 				data = '{\
 							"UserID":"'+userId+'",\
 							"AppVersion":'+appVersion+',\
@@ -311,7 +311,6 @@
 
 <body>
 	<form>
-	<!-- 07cca6fe-2128-4f48-aca2-27cf76fefba3 -->
 		<p>Bitte geben Sie ihre Cippy-ID ein</p>
 		<input type="text" name="id" placeholder="ID" id="id">
 		<input type="number" name="type" placeholder="0" value="0" id="sujet">

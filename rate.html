@@ -208,7 +208,7 @@
 					$('#start').prop('disabled', true);
 					$('#sujet').prop('disabled', true);
 					$('#start').css('background', '#aaa');
-					
+
 				    setTimeout(function() {
 				    	$('form').slideUp(200);
 				    }, 500);
@@ -217,10 +217,10 @@
 				return false;
 			});
 		});
-		
+
 		function start(){
 				data = '{"UserID":"'+userId+'","AppVersion":'+appVersion+',"RequestTime":"/Date('+'1402846713099'+'-0000)/","Operatingsystem":"'+os+'","Devicetype":"'+device+'","Culture":"'+culture+'","OperatingsystemVersion":"'+osv+'"}';
-				
+
 				//StartScreen
 				//stdRequest("http://service.cippy.it/FARESTService/GetStartScreen", data, 'startScreen');
 				//console.log(startScreen);
@@ -228,7 +228,7 @@
 				//gotten gift list
 				//stdRequest("http://service.cippy.it/FARESTService/GetGottenGiftList", data, 'giftList');
 				//console.log(giftList);
-				
+
 				//buddy
 				//stdRequest("http://service.cippy.it/FARESTService/GetBuddyBundleState", data, 'buddy');
 				//console.log(buddy);
@@ -254,7 +254,7 @@
 				for(var n=0; n<(rand/2);n++)
 					rate+=star;
 				log('Bewerten "'+val['Title']+'"  '+rate);
-				//console.log(i);
+				console.log(data);
 				rateRequest('http://service.cippy.it/FARESTService/Vote', data, i, items.length);
 			});
 		}
@@ -278,7 +278,7 @@
 				url: url,
 				contentType: "application/json",
 				data: data,
-				
+
 		    });
 			req.success(function(data){
 				if(curr>=(max-1)){
@@ -301,7 +301,7 @@
 				}
 				log(ls.length+' Item(s) gefunden');
 				sujetMax = ls.length;
-				
+
 				sujetItems = [];
 
 				log('Details laden...');
