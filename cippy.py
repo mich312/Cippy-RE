@@ -1,23 +1,27 @@
-import requests, json, random, re, sys, time
+import requests, json, random, re, sys
 
-userId = '';
+#Insert here your Cippy ID
+cippyId = '';
 
+#Other editable information
 appVersion = '3';
 os = 'iPhone OS';
 device = 'iPhone';
 culture = 'DE';
 osv = '7.1.1';
 
-#Get Pushover notifications
+#Pushover informaiton
 pushoverId = ''
 pushoverUser = ''
 pushover = True
 
+
+#Code
 print "Cippy Bot (Python)"
 msg = ""
 
 def getData(url, sujetType):
-	sujetData = '{"UserID":"'+userId+'","AppVersion":'+appVersion+',"RequestTime":"/Date('+'1402846713099'+'-0000)/","Operatingsystem":"'+os+'","Devicetype":"'+device+'","Culture":"'+culture+'","OperatingsystemVersion":"'+osv+'","SujetListType":'+sujetType+',}';
+	sujetData = '{"cippyId":"'+cippyId+'","AppVersion":'+appVersion+',"RequestTime":"/Date('+'1402846713099'+'-0000)/","Operatingsystem":"'+os+'","Devicetype":"'+device+'","Culture":"'+culture+'","OperatingsystemVersion":"'+osv+'","SujetListType":'+sujetType+',}';
 	headers = {
 		"Host": "service.cippy.it",
 		"Authorization": "4863f25d57230256b687a9428aeae615",
@@ -34,7 +38,7 @@ def getData(url, sujetType):
 	list = []
 	for w in data['SujetListItems']:
 		list.append(w['SujetObjectID'])
-	print "ID: "+userId+"\tType: "+sujetType+"\t\tItems: "+str(len(list))
+	print "ID: "+cippyId+"\tType: "+sujetType+"\t\tItems: "+str(len(list))
 	return list
 
 def rate(list):
@@ -47,7 +51,7 @@ def rate(list):
 		sys.stdout.write('\r['+str(n)+'/'+str(len(list))+']')
 		sys.stdout.flush()
 		rand = (random.randint(0,2)+2)*2
-		sujetData = '{"UserID":"'+userId+'","Voting":'+str(rand)+',"AppVersion":'+appVersion+',"RequestTime":"/Date('+'1402866751507'+'-0000)/","Operatingsystem":"'+os+'","Devicetype":"'+device+'","Culture":"'+culture+'","OperatingsystemVersion":"'+osv+'","SujetObjectID":"'+ident+'"}';
+		sujetData = '{"cippyId":"'+cippyId+'","Voting":'+str(rand)+',"AppVersion":'+appVersion+',"RequestTime":"/Date('+'1402866751507'+'-0000)/","Operatingsystem":"'+os+'","Devicetype":"'+device+'","Culture":"'+culture+'","OperatingsystemVersion":"'+osv+'","SujetObjectID":"'+ident+'"}';
 		headers = {
 			"Host": "service.cippy.it",
 			"Authorization": "f9ed1629daa0a7f2c3befe7eada5752a",
@@ -65,7 +69,7 @@ def rate(list):
 	print ''
 
 rate(getData("http://service.cippy.it/FARESTService/GetSujetList", "1"))
-#rate(getData("http://service.cippy.it/FARESTService/GetSujetList", "0"))
+rate(getData("http://service.cippy.it/FARESTService/GetSujetList", "0"))
 count = re.findall(re.compile(r'[1-9]+'), msg)
 
 message = "You have now "+count[0]+" votes!"
