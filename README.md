@@ -28,6 +28,7 @@ Reverse Engineering [Cippy App].
 2. ```cippy.py``` depends on the python requests library. To install simply run the following commands in your shell.
   ```bash
   $ pip install requests
+  $ pip install requests
   ```
 3. Run with ```./cippy.py```
 4. Enjoy
