@@ -29,7 +29,6 @@ Reverse Engineering [Cippy App].
   
   ```bash
   $ pip install requests
-  $ pip install requests
   ```
 
 3. Run with ```./cippy.py```
