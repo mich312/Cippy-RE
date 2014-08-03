@@ -72,7 +72,10 @@ rate(getData("http://service.cippy.it/FARESTService/GetSujetList", "1"))
 rate(getData("http://service.cippy.it/FARESTService/GetSujetList", "0"))
 count = re.findall(re.compile(r'[1-9]+'), msg)
 
-message = "You have now "+count[0]+" votes!"
+if len(count)>0:
+	message = "You have now "+count[0]+" votes!"
+else:
+	message = "You have now 0 votes!"
 if pushover:
 	res = requests.post("https://api.pushover.net/1/messages.json", data="token="+pushoverId+"&user="+pushoverUser+"&message="+message)
 	print res.status_code
